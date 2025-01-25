@@ -155,3 +155,47 @@ button {
   color: #E5E7EB;
   font-size: 20px;
 }
+
+/* Login page */
+
+.sign-up {
+  background-color: #1F2937;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 32px;
+  height: 78vh;
+}
+.sign-up .login {
+  font-size: 24px;
+  margin: 20px auto;
+}
+.sign-up a {
+  color: #25518e;
+}
+.sign-up form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: end;
+  gap: 20px;
+  font-size: 20px;
+  margin-right: 50px;
+}
+.sign-up form input {
+  width: 15rem;
+  font-size: inherit;
+}
+.sign-up form .submit {
+  border-radius: 8px;
+  background-color: #1F2937;
+  border-color: white;
+  color: white;
+  height: 40px;
+}
+.sign-up form .submit:hover {
+  border-color: rgb(96, 170, 219);
+  color: rgb(96, 170, 219);
+}
