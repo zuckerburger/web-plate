@@ -9,15 +9,14 @@ const validateNewUser = [
 
   body("last").trim().isAlpha().withMessage(`Last name ${alphError}`)
   .isLength({min: 1, max: 15}).withMessage(`Last name ${lengthError(1, 15)}`),
-
+ 
+  body("password").trim().isLength({min: 3, max: 25}).withMessage(`Password ${lengthError(3, 25)}`),
+ 
   body("email").trim().isEmail().withMessage(`Email is incorrect format.`)
   .custom(async email => {
     const user = await db.findUserByEmail(email);
-    if (user) return Promise.reject('Email is already in use.');
-    return true;
+    if (user) throw new Error('Email already in use');
   }),
-
-  body("password").trim().isLength({min: 3, max: 25}).withMessage(`Password ${lengthError(3, 25)}`)
 ]
 
 async function createUserPost(req, res) {
