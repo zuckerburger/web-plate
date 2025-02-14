@@ -9,8 +9,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/public/index.html")));
-app.get("/register", (req, res) => res.sendFile(path.join(__dirname, "/")));
-app.post("/register", controller.createUserPost)
+app.get("/register", (req, res) => res.render('register'));
+app.post("/register", controller.validateNewUser, controller.createUserPost);
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`My first Express app - listening on port ${PORT}!`);
