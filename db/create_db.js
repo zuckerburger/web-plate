@@ -17,3 +17,4 @@ async function main() {
   await client.query(SQL);
   await client.end();
 }
+main();

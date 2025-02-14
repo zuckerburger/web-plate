@@ -23,10 +23,10 @@ async function createUserPost(req, res) {
   const errors = validationResult(req);
   const {first, last, password, email } = req.body;
   if (!errors.isEmpty()) {
-    res.status(400).render('register.ejs', {errors: errors.array()});
+    return res.status(400).render('register', {errors: errors.array()});
   }
   await db.insertUser(first, last, password, email);
-  res.render('register.ejs');
+  res.render('register');
 };
 
 
