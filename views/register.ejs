@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Register</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,12 +13,13 @@
   <div class="sign-up">
     <h1>Sign up!</h1>
     <div class="login">
-      Already signed up? <a href="login.html">Login here</a>
+      Already signed up? <a href="/login">Login here</a>
     </div>
     <form action="/register" method="POST">
       <div>
         <label for="first">First Name</label>
-        <input type="text" name="first" required>
+        <input
+        type="text" name="first" required>
       </div>
       <div>
         <label for="last">Last Name</label>
@@ -39,7 +40,7 @@
         <% locals.errors.forEach((error) => { %>
           <li><%= error.msg %></li>
         <%}) %>
-      <% } else { %>
+      <% } else if (locals.success) { %>
         Congrats, new account created!
       <% } %>
       </ul>  

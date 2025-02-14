@@ -155,7 +155,10 @@ button {
   color: #E5E7EB;
   font-size: 20px;
 }
-
+ a {
+  color: inherit;
+  text-decoration: inherit;
+ }
 /* Login page */
 
 .sign-up {
@@ -174,6 +177,7 @@ button {
 }
 .sign-up a {
   color: #25518e;
+  text-decoration: underline;
 }
 .sign-up form {
   display: flex;

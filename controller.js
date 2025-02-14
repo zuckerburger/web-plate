@@ -26,7 +26,7 @@ async function createUserPost(req, res) {
     return res.status(400).render('register', {errors: errors.array()});
   }
   await db.insertUser(first, last, email, password);
-  res.render('register');
+  res.render('register', {success: true});
 };
 
 
