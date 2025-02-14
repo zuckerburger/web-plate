@@ -184,6 +184,10 @@ button {
   font-size: 20px;
   margin-right: 50px;
 }
+.sign-up ul {
+  font-size: 20px;
+  text-align: left;
+}
 .sign-up form input {
   width: 15rem;
   font-size: inherit;

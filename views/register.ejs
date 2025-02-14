@@ -34,6 +34,15 @@
       </div>
       <input type="submit" id="submit">
     </form>
+    <ul>
+      <% if (locals.errors) { %>
+        <% locals.errors.forEach((error) => { %>
+          <li><%= error.msg %></li>
+        <%}) %>
+      <% } else { %>
+        Congrats, new account created!
+      <% } %>
+      </ul>  
   </div>
   <div class="footer">
     Copyright Web Plate 2025
