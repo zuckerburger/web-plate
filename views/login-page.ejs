@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="header">
+    <a id="header-logo">Web Plate</a>
+  </div>
+  <div class="sign-up">
+    <h1>Log in!</h1>
+    <div class="login">
+      Not signed up? <a href="/register">Register here</a>
+    </div>
+    <form action="/login" method="POST">
+      <div>
+        <label for="username">Email</label>
+        <input type="email" name="username" required>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" required>
+      </div>
+      <input type="submit" id="submit">
+    </form>
+    <% if (locals.error != undefined) { %>
+      <ul>
+        <li>Invalid email or password!</li>
+      </ul>
+    <% } %>
+  </div>
+  <div class="footer">
+    Copyright Web Plate 2025
+  </div>
+</body>
+</html>
