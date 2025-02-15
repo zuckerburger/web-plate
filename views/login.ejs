@@ -12,6 +12,9 @@
   </div>
   <div class="sign-up">
     <h1>Log in!</h1>
+    <div class="login">
+      Not signed up? <a href="/register">Register here</a>
+    </div>
     <form action="/login" method="POST">
       <div>
         <label for="username">Email</label>
@@ -23,6 +26,11 @@
       </div>
       <input type="submit" id="submit">
     </form>
+    <% if (locals.error != undefined) { %>
+      <ul>
+        <li>Invalid email or password!</li>
+      </ul>
+    <% } %>
   </div>
   <div class="footer">
     Copyright Web Plate 2025

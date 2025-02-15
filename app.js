@@ -21,17 +21,18 @@ app.set('view engine', 'ejs');
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/public/index.html")));
 app.get("/register", (req, res) => res.render('register'));
 app.post("/register", controller.validateNewUser, controller.createUserPost);
-app.get("/login/:status?", (req, res) => { 
-  console.log(JSON.stringify(req.session));
-  console.log(JSON.stringify(req.user));
-  console.log('messages ', JSON.stringify(req.session.message));
-  res.render('login', {error: req.params.status});
+app.get("/login", (req, res) => { 
+  res.render('login', {error: req.session.error});
 });
+
 app.post(
   "/login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/login/error"
+  passport.authenticate("local", (err, user, info) => {
+    if (err || !user) {
+      req.session.error = true;
+      return res.redirect('/login');
+    }
+    return res.redirect('/dashboard');
   }),
 );
 
