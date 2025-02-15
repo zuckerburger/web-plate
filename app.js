@@ -19,25 +19,22 @@ app.set('views', path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 // Routes
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/public/index.html")));
-app.get("/register", (req, res) => res.render('register'));
+app.get("/register", (req, res) => res.render('register-page'));
 app.post("/register", controller.validateNewUser, controller.createUserPost);
-app.get("/login", (req, res) => { 
-  res.render('login', {error: req.session.error});
+app.get("/login/:status?", (req, res) => { 
+  res.render('login-page', {error: req.params.status});
 });
 
 app.post(
   "/login",
-  passport.authenticate("local", (err, user, info) => {
-    if (err || !user) {
-      req.session.error = true;
-      return res.redirect('/login');
-    }
-    return res.redirect('/dashboard');
+  passport.authenticate("local",{
+    successRedirect: '/dashboard',
+    failureRedirect: '/login/invalid'
   }),
 );
 
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard', {user: req.user});
+  res.render('dashboard-page', {user: req.user});
 });
 
 const PORT = 3000;
