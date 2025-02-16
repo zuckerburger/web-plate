@@ -239,6 +239,67 @@ text-decoration: underline 3px;
 /* Edit menu */
 .edit-title {
   background-color:#1F2937;
-  color: white;
-  font-size: 42px;
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+  font-weight: 700;
+  padding-bottom: 30px;
+}
+.edit-content {
+  margin: 40px;
+  font-size: 28px;
+  display: flex;
+  gap: 100px;
+}
+.menu-display {
+  display: grid;
+  background-color: #ffffff;
+  min-width: max-content;
+  min-height: max-content;
+  flex-grow: 1;
+  border-radius: 10px;
+  row-gap: 10px;
+  column-gap: 20px;
+  grid-template-columns: 150px 150px 150px 150px 150px;
+  overflow:scroll;
+}
+
+.edit-sidebar button {
+  display: inline-block;
+  font-size: inherit;
+  border-radius: 8px;
+  padding: 15px 10px;
+}
+.edit-sidebar input {
+  font-size: inherit;
+  border-radius: 8px;
+  padding: 15px 10px;
+}
+.new-item {
+  display: flex;
+  flex-direction: column;
+}
+.new-item * {
+  margin: 10px 0;
+  max-width: fit-content;
+}
+.menu-display div {
+  height: 150px;
+  width: 150px;
+  font-size: 20px;
+  margin: 10px;
+  outline: solid 2px rebeccapurple; 
+}
+#delete-items {
+  background-color: red;
+  width: fit-content;
+  height: fit-content;
+}
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.menu-display .empty {
+  color: #7a7b7c;
 }

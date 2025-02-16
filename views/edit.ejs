@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="header">
+    <a class="header-logo" href="/">Web Plate</a>
+     <div class="header-links">
+        <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="edit-title">Edit menu:</div>
+  <div class="edit-content">
+    <div class="edit-sidebar">
+      <% if (locals.business) { %>
+        <%= locals.business %>
+        <% } else { %>
+        <%= locals.user.first%>'s Business
+        <% } %>
+      <form class="edit-name">
+        <input type="text" name="name" placeholder="New business name" required>
+        <button type="submit">Change name</button>
+      </form>
+      New Menu item
+      <form class="new-item" action="/user/edit/menu" method="post">
+        <input type="text" name="item" placeholder="Item name" required>
+        <input type="number" required name="price" min="0" step="0.01" placeholder="Price">
+        <input type="url" placeholder="Image url (optional)" name="imageurl">
+        <button type="submit">Create</button>
+      </form>
+      <% if (locals.error) { %>
+      <ul>
+        <li>Menu item with that name already exists!</li>
+      </ul>
+      <% } %>
+    </div>
+    <div class="menu-container">
+      <div class="menu-display">
+        <% if (locals.menu) {%>
+          <% } else {%>
+            <div class="empty">Items go here...</div>
+          <% } %>
+      </div>
+      <button id="delete-items">Delete</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -14,12 +14,6 @@ app.use(session({
   saveUninitialized: false 
 }));
 app.use(passport.session());
-app.use('/user', (req, res, next) => {
-  if (!req.user) {
-    return res.redirect('/');
-  }
-  next();
-});
 app.set('views', path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 // Routes
@@ -29,7 +23,13 @@ app.post("/register", controller.validateNewUser, controller.createUserPost);
 app.get("/login/:status?", (req, res) => { 
   res.render('login-page', {error: req.params.status});
 });
-
+app.use('/user', (req, res, next) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  res.locals.user = req.user;
+  next();
+});
 app.post(
   "/login",
   passport.authenticate("local",{
@@ -39,15 +39,12 @@ app.post(
 );
 
 app.get('/user/dashboard', (req, res) => {
-  if (req.user) {
-    res.render('dashboard-page', {user: req.user});
-  } else {
-    res.redirect('/');
-  }
+  res.render('dashboard-page', {user: req.user});
 });
 app.get('/user/edit', (req, res) => {
-  res.render()
+  res.render('edit');
 })
+app.post('/user/edit/menu', );
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`My first Express app - listening on port ${PORT}!`);

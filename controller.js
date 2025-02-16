@@ -18,7 +18,13 @@ const validateNewUser = [
     if (user) throw new Error('Email already in use');
   }),
 ]
-
+const validateNewItem = (id) => [
+  body("item").isLength({min: 1, max: 30}).withMessage(`Item name ${lengthError(1,30)}`)
+  .custom(async name => {
+    const item = await db.findItemByName(name, id);
+    if (item) throw new Error('Item name already in use');
+  })
+]
 async function createUserPost(req, res) {
   const errors = validationResult(req);
   const {first, last, password, email } = req.body;
@@ -28,7 +34,6 @@ async function createUserPost(req, res) {
   await db.insertUser(first, last, email, password);
   res.render('register', {success: true});
 };
-
 
 module.exports = {
   createUserPost,
