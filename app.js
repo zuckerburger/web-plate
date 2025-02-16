@@ -14,7 +14,12 @@ app.use(session({
   saveUninitialized: false 
 }));
 app.use(passport.session());
-
+app.use('/user', (req, res, next) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  next();
+});
 app.set('views', path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 // Routes
@@ -28,15 +33,21 @@ app.get("/login/:status?", (req, res) => {
 app.post(
   "/login",
   passport.authenticate("local",{
-    successRedirect: '/dashboard',
+    successRedirect: '/user/dashboard',
     failureRedirect: '/login/invalid'
   }),
 );
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard-page', {user: req.user});
+app.get('/user/dashboard', (req, res) => {
+  if (req.user) {
+    res.render('dashboard-page', {user: req.user});
+  } else {
+    res.redirect('/');
+  }
 });
-
+app.get('/user/edit', (req, res) => {
+  res.render()
+})
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`My first Express app - listening on port ${PORT}!`);

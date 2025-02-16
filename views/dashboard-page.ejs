@@ -4,11 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <% if (locals.user)  { %>
-    <h1>Welcome back, <%= locals.user.first%></h1>
-  <% } %>
-</body>
+  <div class="header">
+    <a class="header-logo" href="/">Web Plate</a>
+     <div class="header-links">
+        <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="dash-content">
+    <h1 id="dashboard-welcome">Welcome back, <%= user.first%>!</h1>
+    <div id="business-name">
+      <% if (locals.business) { %>
+      <%= locals.business %>
+      <% } else { %>
+      <%= user.first%>'s Business
+      <% } %>
+    </div>
+    <div id="dashboard-actions">
+      <button><a href="/user/edit">Edit menu</a></button>
+      <button>Create orders</button>
+      <button>View sales</button>
+    </div>
+  </div>
+  <div class="footer">
+    Copyright Web Plate 2025
+  </div>
+  </body>
 </html>

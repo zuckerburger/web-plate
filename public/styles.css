@@ -23,9 +23,9 @@ body {
   padding: 30px 250px;
   align-items: center;
 }
-#header-logo {
+.header-logo {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .header-links {
   display: flex;
@@ -206,4 +206,39 @@ button {
 #submit:hover {
   border-color: rgb(96, 170, 219);
   color: rgb(96, 170, 219);
+}
+/* Dashboard */
+.dash-content {
+  background-color: #1F2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.dash-content h1 {
+  font-size: 40px;
+  font-style: italic;
+}
+.dash-content #business-name {
+  font-size: 70px;
+  font-weight: 600;
+  margin: 25px 0;
+text-decoration: underline 3px;
+}
+#dashboard-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+#dashboard-actions button {
+  font-size: 28px;
+  padding: 20px 50px;
+}
+/* Edit menu */
+.edit-title {
+  background-color:#1F2937;
+  color: white;
+  font-size: 42px;
 }
