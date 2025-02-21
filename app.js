@@ -39,11 +39,9 @@ app.post(
 );
 
 app.get('/user/dashboard', (req, res) => {
-  res.render('dashboard-page', {user: req.user});
+  res.render('dashboard-page');
 });
-app.get('/user/edit', (req, res) => {
-  res.render('edit');
-})
+app.get('/user/edit', (req, res) => res.render('edit'));
 app.post('/user/edit/menu', );
 const PORT = 3000;
 app.listen(PORT, () => {

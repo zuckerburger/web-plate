@@ -15,12 +15,12 @@
     </div>
   </div>
   <div class="dash-content">
-    <h1 id="dashboard-welcome">Welcome back, <%= user.first%>!</h1>
+    <h1 id="dashboard-welcome">Welcome back, <%= locals.user.first%>!</h1>
     <div id="business-name">
-      <% if (locals.business) { %>
-      <%= locals.business %>
+      <% if (locals.user.business) { %>
+      <%= locals.user.business %>
       <% } else { %>
-      <%= user.first%>'s Business
+      <%= locals.user.first%>'s Business
       <% } %>
     </div>
     <div id="dashboard-actions">
