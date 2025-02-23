@@ -28,11 +28,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.selectUserById(id);
-    console.log(JSON.stringify(user));  
     done(null, user);
   }
   catch(err) {
-    console.log(JSON.stringify(err));
     done(err);
   }
 });

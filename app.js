@@ -41,8 +41,8 @@ app.post(
 app.get('/user/dashboard', (req, res) => {
   res.render('dashboard-page');
 });
-app.get('/user/edit', (req, res) => res.render('edit'));
-app.post('/user/edit/menu', );
+app.get('/user/edit', controller.editMenuGet);
+app.post('/user/edit/menu', controller.validateNewItem, controller.createItemPost);
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`My first Express app - listening on port ${PORT}!`);

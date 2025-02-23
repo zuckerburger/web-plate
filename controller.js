@@ -19,9 +19,13 @@ const validateNewUser = [
     if (user) throw new Error('Email already in use');
   }),
 ]
-const validateNewItem = (id) => [
-  body("item").isLength({min: 1, max: 30}).withMessage(`Item name ${lengthError(1,30)}`)
-  .custom(async name => {
+const validateNewItem = [
+  body("name").isLength({min: 1, max: 30}).withMessage(`Item name ${lengthError(1,30)}`)
+  .custom(async (name, {req}) => {
+    const id = req.user?.id;
+    if (!req.user) {
+      throw new Error("Invalid user session, please login again.")
+    }
     const item = await db.findItemByName(name, id);
     if (item) throw new Error('Item name already in use');
   })
@@ -37,15 +41,26 @@ async function createUserPost(req, res) {
 };
 
 async function createItemPost(req, res) {
-  const errors = validateNewItem(req.user.id);
-  const {name, price, image} = req.body;
-  if (!errors.isEmpty()) {
-    return res.status(400).render('edit', {errors: errors.array()});
+  const errors = validationResult(req);
+  const {name, price, imageurl} = req.body;
+  if (errors.isEmpty()) {
+    await db.insertItem(req.user.id, name, price, imageurl);
+  } else {
+    console.log(errors);
   }
-  await db.insertItem(req.user.id, name, price, image);
-  res.render('edit', {errrors: []})
+  res.redirect('/user/edit');
+}
+async function editMenuGet(req, res) {
+  const items = await db.selectItemsFromUser(req.user.id);
+  console.log('Menu is ' + JSON.stringify(items));
+  res.locals.menu = items;
+  res.render('edit');
 }
 module.exports = {
   createUserPost,
-  validateNewUser
+  validateNewUser,
+  createItemPost,
+  validateNewItem,
+  editMenuGet
+
 }

@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
   last VARCHAR(15),
   email VARCHAR(255) UNIQUE,
   password VARCHAR(25)
-  )
+  );
+  
 CREATE TABLE IF NOT EXISTS items (
   id INTEGER,
   name VARCHAR(30),
