@@ -38,7 +38,7 @@
       <div class="menu-display">
         <% if (locals.menu) {%>
           <% locals.menu.forEach(item => { %>
-            <div>
+            <div onclick="toggle(this)" id=<%= item.name %>>
               <div class="item-name"><%= item.name %></div>
               <img src="<%= item.url%>" alt="">
               $<%= item.price  %></div> 
@@ -51,4 +51,22 @@
     </div>
   </div>
 </body>
+<script>
+  function toggle(item) {
+    item.classList.toggle('selected');
+  }
+  
+  function deleteItems() {
+    const elements = document.getElementsByClassName('selected');
+    if (!elements || elements.length == 0) return;
+    elementNames = elements.map((item) => item.id);
+    fetch("/user/edit/menu/delete", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(elementNames)
+    });
+  }
+</script>
 </html>

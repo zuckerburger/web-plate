@@ -37,7 +37,7 @@ app.post(
     failureRedirect: '/login/invalid'
   }),
 );
-
+app.get('/user/edit/menu/delete', )
 app.get('/user/dashboard', (req, res) => {
   res.render('dashboard-page');
 });

@@ -254,14 +254,16 @@ text-decoration: underline 3px;
 .menu-display {
   display: grid;
   background-color: #ffffff;
-  min-width: max-content;
-  min-height: max-content;
-  flex-grow: 1;
+  width: 800px;
+  height: 450px;
   border-radius: 10px;
   row-gap: 10px;
   column-gap: 20px;
-  overflow:scroll;
+  padding: 10px;
+  padding-right: 40px;
+  overflow: scroll;
   grid-template-columns: 180px 180px 180px 180px;
+  outline: solid 2px red;
 }
 
 .edit-sidebar button {
@@ -297,8 +299,9 @@ text-decoration: underline 3px;
   background-color: #f4f4f4;
   text-align: center;
 }
-.mennu-display > .toggled {
-  background-color: #a4bde6;
+.menu-display .selected {
+  background-color:#2d6fcc;
+  color: white;
 }
 .menu-display .item-name {
   min-height: 50px;
@@ -309,16 +312,18 @@ text-decoration: underline 3px;
   display: block;
   margin-bottom: 10px;
 }
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
 #delete-items {
   background-color: red;
   width: fit-content;
   height: fit-content;
 }
-.menu-container {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
+
 .menu-display .empty {
   color: #7a7b7c;
 }

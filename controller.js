@@ -1,6 +1,5 @@
 const {body, validationResult } = require("express-validator");
 const db = require('./db/queries');
-const { escapeIdentifier } = require("pg");
 const alphError = "must only contain letters.";
 const lengthError = (min, max) => { return `must be between ${min} and ${max} characters.` };
 
@@ -34,10 +33,10 @@ async function createUserPost(req, res) {
   const errors = validationResult(req);
   const {first, last, password, email } = req.body;
   if (!errors.isEmpty()) {
-    return res.status(400).render('register', {errors: errors.array()});
+    return res.status(400).render('register-page', {errors: errors.array()});
   }
   await db.insertUser(first, last, email, password);
-  res.render('register', {success: true});
+  res.render('register-page', {success: true});
 };
 
 async function createItemPost(req, res) {
