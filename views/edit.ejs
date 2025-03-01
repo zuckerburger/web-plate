@@ -15,17 +15,13 @@
     </div>
   </div>
   <div class="edit-title">Edit menu:</div>
+  <h1 id="business-name"><% if (locals.business) { %>
+    <%= locals.business %>
+    <% } else { %>
+    <%= locals.user.first%>'s Business
+    <% } %> </h1>
   <div class="edit-content">
     <div class="edit-sidebar">
-      <% if (locals.business) { %>
-        <%= locals.business %>
-        <% } else { %>
-        <%= locals.user.first%>'s Business
-        <% } %>
-      <form class="edit-name">
-        <input type="text" name="name" placeholder="New business name" required>
-        <button type="submit">Change name</button>
-      </form>
       New Menu item
       <form class="new-item" action="/user/edit/menu" method="post">
         <input type="text" name="name" placeholder="Item name" required>
