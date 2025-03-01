@@ -26,8 +26,10 @@ async function insertItem(id, name, price, url) {
 
 async function selectItemsFromUser(id) {
   const { rows } = await pool.query(`SELECT * FROM items WHERE id = $1`, [id]);
-  console.log('rows are ' + rows);
   return (rows.length > 0 )? rows : null;
+}
+async function deleteMenuItems(names, id) {
+  await pool.query(`DELETE FROM items WHERE id = $2 AND name = ANY($1)`, [names, id]);
 }
 module.exports = {
   findUserByEmail,
@@ -35,5 +37,6 @@ module.exports = {
   selectUserById,
   insertItem,
   selectItemsFromUser,
-  findItemByName
+  findItemByName,
+  deleteMenuItems
 }

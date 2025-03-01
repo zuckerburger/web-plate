@@ -38,7 +38,7 @@
       <div class="menu-display">
         <% if (locals.menu) {%>
           <% locals.menu.forEach(item => { %>
-            <div onclick="toggle(this)" id=<%= item.name %>>
+            <div onclick="toggle(this)" data-name="<%= item.name%>">
               <div class="item-name"><%= item.name %></div>
               <img src="<%= item.url%>" alt="">
               $<%= item.price  %></div> 
@@ -47,7 +47,7 @@
             <div class="empty">Items go here...</div>
           <% } %>
       </div>
-      <button id="delete-items">Delete</button>
+      <button id="delete-items" onclick="deleteItems()">Delete</button>
     </div>
   </div>
 </body>
@@ -57,16 +57,23 @@
   }
   
   function deleteItems() {
-    const elements = document.getElementsByClassName('selected');
+    const elements = Array.from(document.getElementsByClassName('selected'));
     if (!elements || elements.length == 0) return;
-    elementNames = elements.map((item) => item.id);
+    elementNames = elements.map((item) => { 
+      console.log(item.id);
+      return item.getAttribute('data-name');});
+    console.log(elementNames);
     fetch("/user/edit/menu/delete", {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(elementNames)
-    });
+      body: JSON.stringify({"items": elementNames}) 
+    }).then(response => {
+    if (response.ok) {
+      // Reload the page or update the UI after successful deletion
+      location.reload();  // This will reload the page after items are deleted
+    }});
   }
 </script>
 </html>

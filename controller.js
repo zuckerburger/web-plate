@@ -55,11 +55,31 @@ async function editMenuGet(req, res) {
   res.locals.menu = items;
   res.render('edit');
 }
+
+async function deleteMenuItemsPost(req, res) {
+  const  { items } = req.body;
+  console.log('body ', req.body);
+  console.log('deleted items ' + items);
+  console.log(typeof(items[0]));
+
+  try {
+    await db.deleteMenuItems(items, req.user.id);
+    console.log('Items deleted successfully');
+    res.redirect('/user/edit');
+  } catch (err) {
+    console.error('Error deleting items: ', err);
+    res.status(500);
+  }
+
+
+}
+
 module.exports = {
   createUserPost,
   validateNewUser,
   createItemPost,
   validateNewItem,
-  editMenuGet
+  editMenuGet,
+  deleteMenuItemsPost
 
 }

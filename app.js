@@ -7,6 +7,7 @@ const passport = require('./passport');
 const session = require('express-session');
 
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(session({ 
   secret: process.env.SESSION_SECRET,
@@ -37,7 +38,7 @@ app.post(
     failureRedirect: '/login/invalid'
   }),
 );
-app.get('/user/edit/menu/delete', )
+app.post('/user/edit/menu/delete', controller.deleteMenuItemsPost);
 app.get('/user/dashboard', (req, res) => {
   res.render('dashboard-page');
 });

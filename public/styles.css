@@ -254,8 +254,6 @@ text-decoration: underline 3px;
 .menu-display {
   display: grid;
   background-color: #ffffff;
-  width: 800px;
-  height: 450px;
   border-radius: 10px;
   row-gap: 10px;
   column-gap: 20px;
@@ -289,8 +287,6 @@ text-decoration: underline 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 250px;
-  width: 170px;
   overflow-wrap: anywhere;
   font-size: 20px;  
   margin: 10px;
