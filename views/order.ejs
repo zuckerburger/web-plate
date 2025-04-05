@@ -14,36 +14,34 @@
         <a href="/logout">Logout</a>
     </div>
   </div>
-  <div class="edit-title">Edit menu:</div>
   <h1 id="business-name"><% if (locals.business) { %>
     <%= locals.business %>
     <% } else { %>
     <%= locals.user.first%>'s Business
     <% } %> </h1>
   <div class="edit-content">
-    <div class="edit-sidebar">
-      New Menu item
-      <form class="new-item" action="/user/edit/menu" method="post">
-        <input type="text" name="name" placeholder="Item name" required>
-        <input type="number" required name="price" min="0" step="0.01" max="9999999.99" placeholder="Price">
-        <input type="url" placeholder="Image url (optional)" name="imageurl">
-        <button type="submit">Create</button>
-      </form>
-    </div>
     <div class="menu-container">
       <div class="menu-display">
         <% if (locals.menu) {%>
           <% locals.menu.forEach(item => { %>
-            <div onclick="toggle(this)" data-name="<%= item.name%>">
+            <div onclick="add(this)" data-name="<%= item.name%>" data-price="<%= item.price%>">
               <div class="item-name"><%= item.name %></div>
               <img src="<%= item.url%>" alt="">
-              $<%= item.price  %></div>
+              $<%= item.price%></div>
           <% }); %>
           <% } else {%>
             <div class="empty">Items go here...</div>
           <% } %>
       </div>
-      <button id="delete-items" onclick="deleteItems()">Delete</button>
+    </div>
+    <div class="order-container">
+      <div id="order-display">
+      </div>
+      <div class="order-buttons">
+        <div>$<span id="total-price">0.00</span></div>
+        <button onclick="deleteItems(this)">Remove</button>
+        <button>Create</button>
+      </div>
     </div>
   </div>
 </body>
@@ -51,25 +49,33 @@
   function toggle(item) {
     item.classList.toggle('selected');
   }
-  
+
+  function add(item) {
+    const orderDisplay = document.getElementById('order-display');
+    const newdiv = document.createElement('div');
+    const price = item.getAttribute('data-price');
+    const name = item.getAttribute('data-name')
+    console.log(`textContent is ${price}`);
+    orderDisplay.appendChild(newdiv);
+
+    // Update price
+    let totalPrice = document.getElementById('total-price');
+    totalPrice.textContent = parseFloat(totalPrice.textContent) + parseFloat(price);
+
+    newdiv.textContent = `${name}    $${price}`;
+    newdiv.onclick = function() { toggle(this) };
+    newdiv.dataset.name = name;
+    newdiv.dataset.price = price;
+  }
+
   function deleteItems() {
     const elements = Array.from(document.getElementsByClassName('selected'));
-    if (!elements || elements.length == 0) return;
-    elementNames = elements.map((item) => { 
-      console.log(item.id);
-      return item.getAttribute('data-name');});
-    console.log(elementNames);
-    fetch("/user/edit/menu/delete", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({"items": elementNames}) 
-    }).then(response => {
-    if (response.ok) {
-      // Reload the page or update the UI after successful deletion
-      location.reload();  // This will reload the page after items are deleted
-    }});
+    elements.forEach((element) =>  {
+      let totalPrice = document.getElementById('total-price');
+      totalPrice.textContent = parseFloat(totalPrice.textContent) - parseFloat(element.dataset.price);
+      element.remove();
+    });
   }
+
 </script>
 </html>

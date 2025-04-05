@@ -8,12 +8,20 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(255) UNIQUE,
   password VARCHAR(25)
   );
-  
+
 CREATE TABLE IF NOT EXISTS items (
   id INTEGER,
   name VARCHAR(30),
   price NUMERIC,
   url TEXT
+)
+
+CREATE TABLE IF NOT EXISTS orders (
+  order_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  user_id INTEGER,
+  items JSON,
+  price NUMERIC,
+  time DATETIME
 )
 `
 async function main() {

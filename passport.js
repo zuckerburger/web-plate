@@ -4,7 +4,7 @@ require('dotenv').config()
 const db = require('./db/queries')
 passport.use(
   new LocalStrategy(async (username, password, done) => {
-    try { 
+    try {
       const user = await db.findUserByEmail(username);
       console.log(JSON.stringify(user));
       if (!user) {

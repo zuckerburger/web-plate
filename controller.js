@@ -51,11 +51,20 @@ async function createItemPost(req, res) {
 }
 async function editMenuGet(req, res) {
   const items = await db.selectItemsFromUser(req.user.id);
-  console.log('Menu is ' + JSON.stringify(items));
   res.locals.menu = items;
   res.render('edit');
 }
 
+async function createOrderGet(req, res) {
+  const items = await db.selectItemsFromUser(req.user.id);
+  res.locals.menu = items;
+  res.render('order');
+}
+
+async function createOrderPost(req, res) {
+  const {items} = req.body;
+  await db.insertOrder(req.user.id, items);
+}
 async function deleteMenuItemsPost(req, res) {
   const  { items } = req.body;
   console.log('body ', req.body);
@@ -80,6 +89,7 @@ module.exports = {
   createItemPost,
   validateNewItem,
   editMenuGet,
-  deleteMenuItemsPost
+  deleteMenuItemsPost,
+  createOrderGet
 
 }
