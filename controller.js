@@ -62,9 +62,11 @@ async function createOrderGet(req, res) {
 }
 
 async function createOrderPost(req, res) {
-  const {items} = req.body;
-  await db.insertOrder(req.user.id, items);
+  const {items, price} = req.body;
+  await db.insertOrder(req.user.id, items, price);
+  res.redirect('/user/order');
 }
+
 async function deleteMenuItemsPost(req, res) {
   const  { items } = req.body;
   console.log('body ', req.body);
@@ -90,6 +92,7 @@ module.exports = {
   validateNewItem,
   editMenuGet,
   deleteMenuItemsPost,
-  createOrderGet
+  createOrderGet,
+  createOrderPost
 
 }

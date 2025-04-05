@@ -28,9 +28,16 @@ async function selectItemsFromUser(id) {
   const { rows } = await pool.query(`SELECT * FROM items WHERE id = $1`, [id]);
   return (rows.length > 0 )? rows : null;
 }
+
 async function deleteMenuItems(names, id) {
   await pool.query(`DELETE FROM items WHERE id = $2 AND name = ANY($1)`, [names, id]);
 }
+
+async function insertOrder(userId, items, price) {
+  await pool.query(`INSERT INTO orders (user_id, items, price, time)
+    VALUES ($1, $2, $3, NOW())`, [userId, JSON.stringify(items), price]);
+}
+
 module.exports = {
   findUserByEmail,
   insertUser,
@@ -38,5 +45,6 @@ module.exports = {
   insertItem,
   selectItemsFromUser,
   findItemByName,
-  deleteMenuItems
+  deleteMenuItems,
+  insertOrder
 }

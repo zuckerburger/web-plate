@@ -40,7 +40,7 @@
       <div class="order-buttons">
         <div>$<span id="total-price">0.00</span></div>
         <button onclick="deleteItems(this)">Remove</button>
-        <button>Create</button>
+        <button onclick="createOrder()">Create</button>
       </div>
     </div>
   </div>
@@ -54,9 +54,8 @@
     const orderDisplay = document.getElementById('order-display');
     const newdiv = document.createElement('div');
     const price = item.getAttribute('data-price');
-    const name = item.getAttribute('data-name')
+    const name = item.getAttribute('data-name');
     console.log(`textContent is ${price}`);
-    orderDisplay.appendChild(newdiv);
 
     // Update price
     let totalPrice = document.getElementById('total-price');
@@ -66,6 +65,9 @@
     newdiv.onclick = function() { toggle(this) };
     newdiv.dataset.name = name;
     newdiv.dataset.price = price;
+    newdiv.classList.add('order-item');
+
+    orderDisplay.appendChild(newdiv);
   }
 
   function deleteItems() {
@@ -74,6 +76,22 @@
       let totalPrice = document.getElementById('total-price');
       totalPrice.textContent = parseFloat(totalPrice.textContent) - parseFloat(element.dataset.price);
       element.remove();
+    });
+  }
+
+  function createOrder() {
+    const items = Array.from(document.getElementsByClassName('order-item'));
+    itemNames = items.map(item => item.dataset.name);
+    const price = parseFloat(document.getElementById('total-price').textContent);
+    fetch("/user/order/create", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "items": itemNames,
+        "price": price
+      })
     });
   }
 

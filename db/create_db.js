@@ -14,15 +14,15 @@ CREATE TABLE IF NOT EXISTS items (
   name VARCHAR(30),
   price NUMERIC,
   url TEXT
-)
+);
 
 CREATE TABLE IF NOT EXISTS orders (
   order_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   user_id INTEGER,
   items JSON,
   price NUMERIC,
-  time DATETIME
-)
+  time TIMESTAMP
+);
 `
 async function main() {
   const client = new Client( {
