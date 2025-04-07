@@ -38,6 +38,11 @@ async function insertOrder(userId, items, price) {
     VALUES ($1, $2, $3, NOW())`, [userId, JSON.stringify(items), price]);
 }
 
+async function selectOrdersFromUser(userId) {
+  const { rows } = await pool.query(`SELECT * FROM orders WHERE user_id = $1`, [userId]);
+  return (rows.length > 0 )? rows : null;
+}
+
 module.exports = {
   findUserByEmail,
   insertUser,
@@ -46,5 +51,6 @@ module.exports = {
   selectItemsFromUser,
   findItemByName,
   deleteMenuItems,
-  insertOrder
+  insertOrder,
+  selectOrdersFromUser
 }

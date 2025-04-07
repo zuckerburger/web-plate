@@ -81,8 +81,13 @@ async function deleteMenuItemsPost(req, res) {
     console.error('Error deleting items: ', err);
     res.status(500);
   }
+}
 
-
+async function viewSalesGet(req, res) {
+  const sales = await db.selectOrdersFromUser(req.user.id);
+  console.log(sales);
+  res.locals.sales = sales;
+  res.render('sales');
 }
 
 module.exports = {
@@ -93,6 +98,6 @@ module.exports = {
   editMenuGet,
   deleteMenuItemsPost,
   createOrderGet,
-  createOrderPost
-
+  createOrderPost,
+  viewSalesGet
 }

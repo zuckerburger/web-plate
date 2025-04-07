@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="header">
+    <a class="header-logo" href="/user/dashboard">Web Plate</a>
+     <div class="header-links">
+        <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="page-title">View Sales:</div>
+  <div class="sales-section">
+    <div class="sales-container">
+      <% if (locals.sales) { %>
+        <table>
+          <tr>
+            <th>Order Id</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Items</th>
+          </tr>
+          <% locals.sales.forEach(order => { %>
+            <tr>
+              <td> <%= order.order_id %></td>
+              <td> <%= order.time.toLocaleString('en-AU') %></td>
+              <td> <%= order.price %></td>
+              <td> <%= order.items.sort() %></td>
+            </tr>
+          <% }) %>
+        </table>
+      <% } else { %>
+        <div id="no-sales-msg">No sales found</div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

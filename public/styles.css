@@ -237,7 +237,7 @@ text-decoration: underline 3px;
   padding: 20px 50px;
 }
 /* Edit menu */
-.edit-title {
+.page-title {
   background-color:#1F2937;
   color: #ffffff;
   font-size: 40px;
@@ -349,6 +349,50 @@ text-decoration: underline 3px;
 .menu-display .empty {
   color: #7a7b7c;
 }
+
 #business-name {
   margin-left: 30px;
+}
+
+.sales-section {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+.sales-container {
+  background-color:#f4f4f4;
+  max-height: 700px;
+  max-width: 1200px;
+  min-height: 400px;
+  min-width: 800px;
+  overflow: scroll;
+}
+
+#no-sales-msg {
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2b3646;
+}
+
+table {
+  width: 100%;
+  font-size: 20px;
+}
+
+th {
+  background-color: #25518e;
+  outline: 2px solid #25518e;
+  padding: 0px 50px;
+  color: aliceblue;
+}
+
+td {
+  background-color: #9fc7fe;
+  text-align: center;
+  font-weight: 700;
+}
+
+th, td {
+  padding: 20px;
 }

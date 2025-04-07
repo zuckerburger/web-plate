@@ -44,6 +44,7 @@ app.get('/user/dashboard', (req, res) => {
 });
 app.get('/user/edit', controller.editMenuGet);
 app.get('/user/order', controller.createOrderGet);
+app.get('/user/sales', controller.viewSalesGet);
 app.post('/user/edit/menu', controller.validateNewItem, controller.createItemPost);
 const PORT = 3000;
 app.listen(PORT, () => {
