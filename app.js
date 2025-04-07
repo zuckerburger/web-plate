@@ -51,4 +51,4 @@ app.listen(PORT, () => {
   console.log(`My first Express app - listening on port ${PORT}!`);
 });
 app.post('/user/order/create', controller.createOrderPost);
-app.get('/logout')
+app.get('/logout', controller.logoutGet);

@@ -90,6 +90,15 @@ async function viewSalesGet(req, res) {
   res.render('sales');
 }
 
+async function logoutGet(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+}
+
 module.exports = {
   createUserPost,
   validateNewUser,
@@ -99,5 +108,6 @@ module.exports = {
   deleteMenuItemsPost,
   createOrderGet,
   createOrderPost,
-  viewSalesGet
+  viewSalesGet,
+  logoutGet
 }
