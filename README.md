@@ -3,5 +3,5 @@ A web application designed for restaurants and businesses alike, with database m
 - Express.js backend
 - PostgreSQL database
 - Passport.js middleware for secure user authentication and session management
-- Express-Validator middleware for sanitising and validating forms
+- Express-Validator middleware for sanitising and validating form data
 - EJS for dynamically rendering HTML views
