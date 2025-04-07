@@ -26,7 +26,10 @@ CREATE TABLE IF NOT EXISTS orders (
 `
 async function main() {
   const client = new Client( {
-    connectionString: process.env.CONNECTION_STRING
+    connectionString: process.env.CONNECTION_STRING,
+    ssl: {
+      rejectUnauthorized: false
+    }
   });
   await client.connect();
   await client.query(SQL);
