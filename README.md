@@ -1,5 +1,5 @@
 # Web-Plate
-A web application designed for restaurants and businesses alike, with database management for customising and building menu items, creating orders, and viewing sales. Deployed with Render [here](https://web-plate.onrender.com).
+A web application designed for restaurants and businesses alike, with database management for customising and building menu items, creating orders, and viewing sales. Deployed with Render [here](https://web-plate.onrender.com) (Currently not functional since free trial expired).
 - Express.js backend
 - PostgreSQL database
 - Passport.js middleware for secure user authentication and session management
